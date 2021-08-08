@@ -1,0 +1,36 @@
+<nav class="navbar navbar-light bg-light justify-content-between">
+  <a class="navbar-brand">Navbar</a>
+  <form class="form-inline">
+    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" [(ngModel)]="searchValue"
+      [ngModelOptions]="{standalone: true}">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="search()">Search</button>
+    <button class="btn btn-outline-danger my-2 my-sm-0 ml-2" type="cancel" (click)="clear()">Clear</button>
+  </form>
+</nav>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th *ngFor="let item of displayedColumns">{{item}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of sourceData" (click)="openDialog(content,item)">
+      <td>{{item.title}}</td>
+      <td>{{item.url}}</td>
+      <td>{{item.created_at | date : 'dd/MM/yyyy'}}</td>
+      <td>{{item.author}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title"></h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    {{selectedRowData}}
+  </div>
+</ng-template>
